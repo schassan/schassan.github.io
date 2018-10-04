@@ -1,0 +1,238 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup>
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Nachhaltigkeit Digitaler Editionen an der HAB</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Technische Infrastruktur</li>
+        <li>Personal</li>
+        <li>Daten &amp; Formate</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Steine des Anstoßes</h2></hgroup>
+    <article>
+      <ul>
+        <li>WDB wurde 1998 eröffnet</li>
+        <li>Eigenentwicklung &#x2192; "Fluch der frühen Geburt"</li>
+        <li>Kritik der DFG, die Oberfläche zu modernisieren
+          <ul>
+            <li>Image-Viewer &#x2192; IIIF</li>
+            <li>Modernes Web-Layout &#x2192; Responsive Design</li>
+            <li>Funktionalitäten &#x2192; Suche, Daten-Anordnung</li>
+          </ul>
+        </li>
+        <li>keine funktionale Trennung von Arbeits- und Publikationsumgebung</li>
+        <li>Einführung eines Corporate Design</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Technische Infrastruktur</h2>
+      <h3>Die Säulen der WDB</h3>
+    </hgroup>
+    <article>
+      <table>
+        <thead>
+          <tr><th>Bereich</th><th>bisher</th><th>zukünftig</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Digitalisate</td><td>PHP-Eigenbau</td><td>IIIF + Kitodo (?)</td></tr>
+          <tr><td>Digitale Editionen</td><td>PHP-Eigenbau</td><td>eXist / TextGrid</td></tr>
+          <tr><td>e-Publikationen</td><td>&#x2014;</td><td>(?)</td></tr>
+        </tbody>
+      </table>
+      <!--
+      <aside class="notes">
+        <ul>
+          <li>IIIF-Einführung im Rahmen eines Digitalisierungskooperationsprojektes mit Bodleian (Polonsky Foundation)</li>
+          <li>Kitodo zunächst nur für Strukturdatenerschließung</li>
+        </ul>
+      </aside>
+      -->
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Arbeitsgruppe "Erneuerung Digitale Editionen"</h2></hgroup>
+    <article>
+      <ul>
+        <li>Erarbeitet Empfehlungen mit Angaben zu einmaligen und laufenden Kosten</li>
+        <li>Themenfeld Infrastruktur
+          <ul>
+            <li>Workbench &#x2192; Publikation + Archiv</li>
+            <li>Layoutoptimierung</li>
+            <li>Persistente Adressierung</li>
+            <li>Möglichkeiten zentraler Datenhaltung (Entitäten, Literatur)</li>
+            <li>Visualisierungen</li>
+          </ul>
+        </li>
+        <li>Themenfeld Funktionalitäten
+          <ul>
+            <li>Startseite und Suchen</li>
+            <li>Schnittstellen (REST, Download, IIIF, LOD)</li>
+            <li>Nutzungsstatistik</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Strategie für ein neues Publikationskonzept</h2></hgroup>
+    <article>
+      <ul>
+        <li>Daten werden während der Barbeitung in der Workbench nur intern bzw. geschützt sichtbar gemacht.</li>
+        <li>Für fertige Dokumente erfolgt ein Publikationsakt, der versioniert wird und katalogisiert werden kann.</li>
+        <li>Publikationszyklen sollten klein sein.</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Personal</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Bereich</th><th>bisheriger Personaleinsatz</th></tr></thead>
+        <tbody>
+          <tr><td>WDB-Infrastruktur</td><td>Stellenanteile (E 13 TV-L)</td></tr>
+          <tr><td>Digitale Editionen: Organisatorische Betreuung</td><td>0,5 E 9 TV-L</td></tr>
+          <tr><td>Digitale Editionen: Inhaltliche Betreuung</td><td>Stellenanteile (E 13 TV-L)</td></tr>
+          <tr><td>Digitale Editionen: Anzahl der laufenden Editionsprojekte</td><td>25 laufende Projekte<br/>davon 7 Drittmittel-gefördert</td></tr>
+          <tr><td>Digitale Editionen: Anzahl der technischen Bearbeiter</td><td>aus geförderten Projekte zus. ca. 3 VZE (E 13 TV-L)</td></tr>
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+      <ul>
+        <li>Überlegungen, die Stellen zu poolen und Aufgaben querschnittsartig zu bearbeiten &#x2192; setzt Umstrukturierung voraus</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Daten &amp; Formate</h2></hgroup>
+    <article>
+      <ul>
+        <li>Versuch, Daten zukünftig in Format des DTABf vorzuhalten<br/>&#x2192; DTABf-Erweiterung für Editionen notwendig</li>
+        <li>Engführung der Editoren über Eingabemöglichkeiten via Oxygen-Authormodus und Schema-Anbindung</li>
+        <li>Qualitätsmanagement &#x2192; Wildwuchs z.B. bei Attributwertvergaben
+          <ul>
+            <li>kontrollierte Vokabulare</li>
+            <li>Abweichungen identifizieren</li>
+            <li>Abweichungen klassifizieren (Übersetzungen, Synonyme, Schreibvarianten, anderes)</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Formatvielfalt (erwünscht)</h2></hgroup>
+    <article>
+      <ul>
+        <li>Statt eines Formates (gibt | braucht) es eine Vielzahl für unterschiedliche Zwecke.</li>
+        <li>Präsentationsformat &#x2192; volle Pracht der ausgezeichneten Texte, zur Repräsentation des Projektzieles</li>
+        <li>Suchformat &#x2192; vor-verarbeitetes Format
+          <ul>
+            <li>Struktur vereinfacht</li>
+            <li>Ambiguitäten wie z.B. &lt;choice&gt;s aufgelöst</li>
+            <li>um "Nebendokumente" wie z.B. Normdaten angereichert</li>
+          </ul>
+        </li>
+        <li>Archivformat &#x2192; DTABf?</li>
+        <li>Datenaustauschformate &#x2192; Schnittstellen</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Qualitätsmanagement</h2></hgroup>
+    <article>
+      <ul>
+        <li>Informationsgrundlagen
+          <ul>
+            <li>Antrag + Bewilligung</li>
+            <li>Kriterienkatalog + Workflowdokumente</li>
+            <li>Editions- und Kodierungsrichtlinie &#x2192; Schemata</li>
+            <li>Vorgaben: Ordnerstrukturen + Schemata</li>
+          </ul>
+        </li>
+        <li>Rechtemanagement</li>
+        <li>Bedarfe
+          <ul>
+            <li>Projektmanagement-Unterstützung (Ticketsystem)</li>
+            <li>Plattform für den Datenaustausch (z.B. ownCloud)</li>
+            <li>Code-Repositorium (github, Bitbucket)</li>
+            <li>Umgebung für kollaboratives Schreiben (z.B. Etherpad)</li>
+            <li>bibliothekarische Zuarbeit im Normdatenbereich</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Ende/&gt;</h2>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+    <aside class="right bottom"><img src="images/CC-BY.png"></aside>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
