@@ -8,6 +8,6 @@
 
 Folien zum Vortrag auf dem Workshop in Düsseldorf. Online zu finden unter:
 
-https://schassan.github.io/WDB-Erfahrungen-und-Strategien
+https://schassan.github.io/2018-WDB-Erfahrungen-und-Strategien
 
 Alle Inhalte [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/), [Torsten Schaßan](https://orcid.org/0000-0002-8902-4775)
