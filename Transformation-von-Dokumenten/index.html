@@ -1,0 +1,347 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" media="all" href="theme/css/default.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup>
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Transformation von Dokumenten</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Dokumente (TEI, EAD, usw.)</li>
+        <li>Transformation (XSLT, XSL-FO)</li>
+        <li>XML-Dokumente navigieren (XPath)</li>
+        <li>Zielformate (HTML, XML, Text)</li>
+        <li>HTML-Dokumente formatieren (CSS)</li>
+      </ul>
+    </article>
+  </slide>
+
+<slide>
+  <hgroup><h2>Ausgangsdokument</h2></hgroup>
+  <article>
+<pre class="prettyprint" data-lang="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;TEI xmlns="http://www.tei-c.org/ns/1.0">
+  &lt;teiHeader>
+      &lt;fileDesc>
+         &lt;titleStmt>
+            &lt;title>Hallo Welt!&lt;/title>
+         &lt;/titleStmt>
+         ...
+      &lt;/fileDesc>
+  &lt;/teiHeader>
+  &lt;text>
+      &lt;body>
+         &lt;p>Hallo Welt!&lt;/p>
+      &lt;/body>
+  &lt;/text>
+&lt;/TEI>
+</pre>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>Zieldokument</h2></hgroup>
+  <article>
+<pre class="prettyprint" data-lang="html">
+&lt;!DOCTYPE html>
+&lt;html>
+    &lt;head>
+        &lt;title>Hallo Welt!&lt;/title>
+    &lt;/head>
+    &lt;body>
+        &lt;p>Hallo Welt!&lt;/p>
+    &lt;/body>
+&lt;/html></pre>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>Transformation</h2></hgroup>
+  <article class="smaller">
+<pre class="prettyprint" data-lang="xsl">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;xsl:stylesheet 
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="tei xs"
+    version="2.0">
+    
+    &lt;xsl:template match="/">
+        &lt;html>
+            &lt;head>
+                &lt;title>&lt;xsl:value-of select="//tei:title"/>&lt;/title>
+            &lt;/head>
+            &lt;body>
+                &lt;p>&lt;xsl:apply-templates select="//tei:body"/>&lt;/p>
+            &lt;/body>
+        &lt;/html>
+    &lt;/xsl:template>
+    
+&lt;/xsl:stylesheet>
+</pre>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>HTML-Dokument formatieren</h2></hgroup>
+  <article>
+<pre class="prettyprint" data-lang="html">
+  &lt;link rel="stylesheet" media="all" href="Hallo-Welt.css"/>
+</pre>
+    <pre class="prettyprint" data-lang="css">
+p {
+    font-size:2em;
+    color:red;
+}
+</pre>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>Zusammenspiel XML+XSLT</h2></hgroup>
+  <article class="flexbox vcenter">
+    <span><img src="images/Zusammenspiel-XML-XSLT.png" class="reflect" alt="Zusammenspiel XML+XSLT" title="Zusammenspiel XML+XSLT"/></span>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>XML-Dokumente navigieren</h2></hgroup>
+  <article class="smaller">
+    <p>Mit XPath kann man in XML-Dokumenten navigieren. Dabei können 7 verschiedene Knotentypen angesteuert werden:</p>
+    <table>
+      <thead>
+        <tr><th>Knotentyp</th><th>Beispiel</th><th>XPath-Ausdruck</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Dokumentknoten</td><td>(das gesamte Dokument)</td><td>/</td></tr>
+        <tr><td>Elementknoten</td><td><pre class="prettyprint" data-lang="xml"><b>&lt;p>&lt;/p></b></pre></td><td>p</td></tr>
+        <tr><td>Attributknoten</td><td><pre class="prettyprint" data-lang="xml">&lt;p <b>rend="color:red"</b>>&lt;/p></pre></td><td>@rend</td></tr>
+        <tr><td>Textknoten</td><td><pre class="prettyprint" data-lang="xml">&lt;p><b>Ein Beispieltext</b>&lt;/p></pre></td><td>text()</td></tr>
+        <tr><td>Namensraumknoten</td><td><pre class="prettyprint" data-lang="xsl">&lt;<b>xsl:</b>template>&lt;/<b>xsl:</b>template></pre></td><td>xsl:</td></tr>
+        <tr><td>Processing-Instructions</td><td><pre class="prettyprint" data-lang="xml"><b>&lt;? ... ?></b></pre></td><td>processing-instruction()</td></tr>
+        <tr><td>Kommentarknoten</td><td><pre class="prettyprint" data-lang="xml"><b>&lt;!-- ... --></b></pre></td><td>comment()</td></tr>
+      </tbody>
+    </table>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>XSL ist auch XML</h2></hgroup>
+  <article>
+    <ul class="build">
+      <li>Der Prozessor traversiert die beiden Bäume (XML und XSL)</li>
+      <li>Schritte im Baum entlang der Achsen werden durch '/' getrennt.</li>
+      <li>Es gibt absolute Pfadangaben, die vom Dokumentknoten aus starten und relative Pfadangaben, die vom aktuellen Kontext ausgehen</li>
+      <li>Immer, wenn im XML ein neuer Knoten wahrgenommen wird, wird in der XSL-Datei nachgeschaut, ob eine Regel angewendet werden muss.</li>
+      <li>Überprüfung nach dem Prinzip: <b>achse::knotentest([prädikat])</b></li>
+      <li>Die Achse ist die Richtung, in der der Baum abgeschritten wird.</li>
+    </ul>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>XPath-Achsen</h2></hgroup>
+  <article class="flexbox vcenter">
+    <span><img src="images/XPath-Achsen.png" class="reflect" alt="XPath-Achsen" title="XPath-Achsen"/></span>
+  </article>
+</slide>
+
+<slide>
+  <hgroup>
+    <h2>XPath-Knotentests</h2>
+  </hgroup>
+  <article>
+    <table>
+      <thead><tr><th>Notation</th><th>verkürzte Notation</th></tr></thead>
+      <tbody>
+        <tr><td>child::head</td><td>head</td></tr>
+        <tr><td>descendant::tei:persName</td><td>//persName</td></tr>
+        <tr><td>preceding-sibling::tei:bibl</td><td>--</td></tr>
+        <tr><td>child::persName/attribute::role</td><td>persName/@role</td></tr>
+        <tr><td>self::node()</td><td>.</td></tr>
+      </tbody>
+    </table>
+    </table>
+  </article>
+</slide>
+
+<slide>
+  <hgroup>
+    <h2>XPath-Prädikate</h2>
+  </hgroup>
+  <article>
+    <table>
+      <thead><tr><th>Notation</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td>//persName[@role = 'addressee']</td><td>Gehe zu allen Nachkommen 'persName', das ein Attribut 'role' hat, dessen Wert 'addressee' ist.</td></tr>
+        <tr><td>persName[surname = 'Müller']</td><td>Gehe zu einem Kindelement 'persName', das ein Kindelement 'surname' hat, dessen Inhalt 'Müller' ist.</td></tr>
+        <tr><td>persName[starts-with(., 'A')]</td><td>Gehe zu einem Kindelement 'persName', dessen Inhalt (=self::node()) mit 'A' beginnt.</td></tr>
+        <tr><td>//person[1]</td><td>Gehe zu einem Nachfahren 'person', welches das erste in einer Liste ist.</td></tr>
+      </tbody>
+    </table>
+    </table>
+  </article>
+</slide>
+
+<slide>
+  <hgroup>
+    <h2>XPath-Funktionen</h2>
+  </hgroup>
+  <article>
+    <table>
+      <thead>
+        <tr><th>Funktionstyp</th><th>Beispiel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Knotenmengen</td><td>position(), last(), current()</td></tr>
+        <tr><td>Zeichenketten</td><td>
+          <ul>
+            <li>concat(), translate(), replace()</li>
+            <li>contains(), matches()</li>
+            <li>starts-with(), ends-with()</li>
+            <li>substring(), substring-before(), substring-after()</li>
+          </ul>
+        </td></tr>
+        <tr><td>numerische</td><td>count(), number(), format-number()</td></tr>
+        <tr><td>logische (boolsche)</td><td>not(), exists()</td></tr>
+      </tbody>
+    </table>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>XSLT-Grundgerüst: Templates</h2></hgroup>
+  <article>
+    <p>Ein Template ist eine Schablone, die angewendet wird, wenn ein XPath-Ausdruck wahr ist.</p>
+  </article>
+  <pre class="prettyprint" data-lang="xsl">
+&lt;xsl:template match="XPath-Knotentest">
+    … Anweisungen … 
+&lt;/xsl:template>
+  </pre>
+</slide>
+
+<slide>
+  <hgroup>
+    <h2>XSLT-Verarbeitungsstrategien</h2>
+  </hgroup>
+  <article class="smaller">
+    <table>
+      <thead>
+        <tr><th>Strategie</th><th>Erläuterung</th><th>Beispiel</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Push</td><td>Den Parser die Datei verarbeiten lassen.</td><td>
+          <pre class="prettyprint" data-lang="xsl">
+&lt;xsl:apply-templates/>
+
+&lt;xsl:apply-templates select=""/></pre>
+        </td></tr>
+        <tr><td>Pull</td><td>Inhalte gezielt holen</td><td>
+          <pre class="prettyprint" data-lang="xsl">
+&lt;xsl:value-of select=""/>
+
+&lt;xsl:for-each select="">
+    … Anweisungen … 
+&lt;/xsl:for-each>
+          </pre>
+        </td></tr>
+        <tr><td>Bedingung</td><td>Bedingung separat überprüfen.</td><td>
+          <pre class="prettyprint" data-lang="xsl">
+&lt;xsl:if test=""/>
+
+&lt;xsl:choose>
+  &lt;xsl:when test="">&lt;/xsl:when>
+  &lt;xsl:otherwise>&lt;/xsl:otherwise>
+&lt;/xsl:choose>
+          </pre>
+        </td></tr>
+      </tbody>
+    </table>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>XSLT-Beispiele</h2></hgroup>
+  <article>
+    <ul>
+      <li>TEI-Stylesheets, z.B. im Oxygen</li>
+      <li><a href="http://diglib.hab.de/rules/styles/mss/TEI-P5-to-Print/current/tei.xsl">Stylesheet für Handschriftenbeschreibungen</a></li>
+      <li><a href="http://diglib.hab.de/rules/styles/helpers/_copyAll_changeSome_add-textLang.xsl">Stylesheet für die Bearbeitung von Daten, hier: Ergänzung von Textsprache</a></li>
+      <li><a href="http://diglib.hab.de/rules/styles/tei-transcript.xsl">Stylesheet für Transkriptionen</a></li>
+    </ul>
+  </article>
+</slide>
+
+<slide>
+  <hgroup><h2>Kurzreferenzen, Tutorials</h2></hgroup>
+  <article>
+    <ul>
+      <li><a href="https://www.i-d-e.de/publikationen/weitereschriften/xml-kurzreferenzen/">IDE XML-Kurzreferenz</a></li>
+      <li><a href="http://www.w3schools.com/xsl/">w3school.com</a></li>
+      <li><a href="http://www.ibm.com/developerworks/xml/tutorials/x-introxslt/">IBM-Tutorial</a></li>
+    </ul>
+  </article>
+</slide>
+  
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Ende/&gt;</h2>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+    <aside class="right bottom"><img src="images/CC-BY.png"></aside>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
