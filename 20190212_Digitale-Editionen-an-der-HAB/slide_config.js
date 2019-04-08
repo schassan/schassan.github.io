@@ -1,7 +1,8 @@
 var SLIDE_CONFIG = {
   // Slide settings
   settings: {
-    title: 'Digitale Editionen an der HAB',
+    title: 'Digitale Editionen an der HAB', //<br>
+    subtitle: '',
     eventInfo: {
       title: 'Referendarstreffen Wolfenbüttel',
       date: '12.2.2019'
