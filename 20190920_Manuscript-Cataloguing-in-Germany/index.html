@@ -1,0 +1,231 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manuscript Cataloguing in Germany</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--This one seems to work all the time, but really small on ipad-->
+  <meta name="viewport" content="initial-scale=0.4"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" type="text/css" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" type="text/css" media="all" href="fonts/stylesheet.css" />
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+<!-- 
+    &#x2192; Pfeil
+    &#x2026; Elipsis
+    <blockquote cite="http://www.i-d-e.de/schriften"></blockquote>
+    <p style="color:#999;">Quellenangabe</p>
+-->
+
+  <slide>
+    <hgroup>
+      <h2>Cataloguing tradition and present in Germany</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Extensive cataloguing according to DFG (German Research Council) cataloguing rules since 1960's</li>
+        <li>Generous funding for manuscript cataloguing (~ 2 weeks per ms)</li>
+        <li>basically <b>two</b> data formats: MXML and TEI (plus very few MARC)</li>
+        <li>TEI is (and will be) the preferred import as well as export format</li>
+        <li>In Wolfenbüttel (and at other institutions/projects) 
+          <ul>
+            <li>cataloguers are supplied with a TEI <a href="https://github.com/schassan/cataloguing">template file</a></li>
+            <li>the template is based on a TEI <a href="https://github.com/schassan/cataloguing/blob/master/schema/mss/cataloguing.odd">customisation</a></li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Challenges with using TEI for manuscript cataloguing</h2></hgroup>
+    <article>
+      <ul>
+        <li>importance of visualisation ("What would the text look like in print?")</li>
+        <li>paragraph structures (e.g. layout, decoNote, provenance, etc) vs. 'atomic' information
+          <ul>
+            <li>importance of whitespace and punctuation</li>
+            <li>when or whether to use &lt;p&gt; at all?</li>
+          </ul>
+        </li>
+        <li>Being layout-oriented, cataloguers tend to be 'creative' in order to achieve a desired output
+          <ul>
+            <li>Does a &lt;msItem&gt; constitute a paragraph in the output?</li>
+          </ul>
+        </li>
+        <li>generate index entries from certain fields vs. explicit encoding of index entries</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Future of cataloguing in Germany</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          <img src="images/HSP-Logo_Interim-150.png" style="float:right;"/>
+          Berlin, Leipzig, Wolfenbüttel and Munich are about to set up a new centralised database for manuscript related information (<a href="http://www.handschriftenportal.de">Handschriftenportal</a>)
+        </li>
+        <li>HAB being responsible for data exchange interfaces and schema control<br/><br/></li>
+        <li>Introduction of the distinction between <b>the manuscript</b> and <b>the catalogue</b> &#x2192; <emph>Cultural object (document)</emph> (KOD)</li>
+        <li>Introduction of a unified identifier for each manuscript (ISMI International standardised manuscript identifier)</li>
+        <li>MXML to be replaced by a new internal format of the Handschriftenportal</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Definition of minimal data set</h2>
+    </hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Field</th><th>Authority control</th><th>TEI coverage</th></tr></thead>
+        <tbody>
+          <tr><td>Place of owning institution</td><td>TGN</td><td>msIdentifier/settlement</td></tr>
+          <tr><td>Name of owning institution</td><td>ISIL</td><td>msIdentifier/repository</td></tr>
+          <tr><td>ID of owning institution</td><td>GND-ID</td><td>msIdentifier/repository/@ref</td></tr>
+          <tr><td>Identification of cultural object</td><td>Shelfmark survey</td><td>msIdentifier/idno<br/>msIdentifier/altIdentifier[@type='shelfmark']</td></tr>
+          <tr><td>internal ID</td><td></td><td>msIdentfier/idno[@type]</td></tr>
+          <tr><td>[ISMI/GND-ID]</td><td></td><td>msIdentfier/idno[@type]</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Definition of Core fields</h2>
+    </hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Field</th><th>Sample Values</th><th>TEI coverage (&lt;msDesc&gt; children)</th></tr></thead>
+        <tbody>
+          <tr><td>Title</td><td>'Augustinus', 'Medizinische Sammelhandschrift'</td><td>head/title</td></tr>
+          <tr><td>Material</td><td>'Parchment', 'Paper'</td><td>physDesc/objectDescription/supportDesc/(support | @material)</td></tr>
+          <tr><td>No. of leaves</td><td>II + 215 + II</td><td>physDesc/objectDescription/supportDesc/extent/measure[@type]</td></tr>
+          <tr><td>Size of leaves</td><td>25 × 15 cm</td><td>physDesc/objectDescription/supportDesc/extent/dimensions</td></tr>
+          <tr><td>Measurements of leaves</td><td>'2°', 'Folio'</td><td>physDesc/objectDescription/supportDesc/extent/measure[@type]</td></tr>
+          <tr><td>Place of origin</td><td>'Northern France?'</td><td>history/origin/origPlace or head/origPlace</td></tr>
+          <tr><td>Date of origin</td><td>'late 14th c'</td><td>history/origin/origDate or head/origDate</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+  <slide>
+    <hgroup>
+      <h2>Definition of Core fields (cont'd)</h2>
+    </hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Field</th><th>Sample Values</th><th>TEI coverage (&lt;msDesc&gt; children)</th></tr></thead>
+        <tbody>
+          <tr><td>Writing language(s)</td><td>'en', 'la', etc (major languages only)</td><td>msContents/textLang or msContents/{model.msItemPart}/@xml:lang</td></tr>
+          <tr><td>Decoration</td><td>(yes|no)</td><td>---</td></tr>
+          <tr><td>Musical notation</td><td>(yes|no)</td><td>---</td></tr>
+          <tr><td>Form type</td><td>'Codex', 'Rotolus', etc.</td><td>physDesc/objectDescription/@form</td></tr>
+          <tr><td>Object status</td><td>'existing', 'lost', 'destroyed', etc</td><td>---</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Other aspects of using TEI</h2></hgroup>
+    <article>
+      <ul>
+        <li>Cataloguing born-digital in TEI is way more straight forward than retro-convert existing catalogs into TEI documents</li>
+        <li>Would it be sufficient to supply a fulltext with some information encoded (most important search fields)?</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Some observations on the TEI usage</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Aspect / Field</th><th>Usage in Bod</th><th>Usage in HAB</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Manuscript title</td>
+            <td>MS. Add. A. 2</td>
+            <td><b>KOD:</b> Jacobus de Voragine (Cod. Guelf. 289 Helmst.)
+              <br/><b>Cat.:</b> Beschreibung von Cod. Guelf. 289 Helmst.</td>
+          </tr>
+          <tr>
+            <td>Dating: When is the 15th c?</td>
+            <td>notBefore="1400" notAfter="1500"</td>
+            <td>notBefore="1401" notAfter="1500"</td>
+          </tr>
+          <tr>
+            <td>Place of origin</td>
+            <td>country + region + settlement</td>
+            <td>---<br/>(no nesting elements used at the moment)</td>
+          </tr>
+          <tr>
+            <td>Writing space</td>
+            <td>supportDesc</td>
+            <td>layoutDesc</td>
+          </tr>
+          <tr>
+            <td>msItem structures</td>
+            <td>multiple &lt;incipit&gt;s possible</td>
+            <td>nested &lt;msItem&gt;s</td>
+          </tr>
+          <tr>
+            <td>identification of works</td>
+            <td>msItem/title/@key</td>
+            <td>--- (keywords in profileDesc/textClass)</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;End/&gt;</h2>
+      <p><img src="images/CC-BY.png"></p>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
