@@ -1,0 +1,273 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Einführung in die Anwendung regulärer Ausdrücke</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--This one seems to work all the time, but really small on ipad-->
+  <meta name="viewport" content="initial-scale=0.4"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" type="text/css" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" type="text/css" media="all" href="fonts/stylesheet.css" />
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css"/>
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+<!-- 
+    &#x2192; Pfeil
+    &#x2026; Elipsis
+    <blockquote cite="http://www.i-d-e.de/schriften"></blockquote>
+    <p style="color:#999;">Quellenangabe</p>
+-->
+
+  <slide>
+    <hgroup>
+      <h2>Definition &quot;Regulärer Ausdruck&quot; (1)</h2>
+    </hgroup>
+    <article>
+      <blockquote cite="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Ein regulärer Ausdruck (englisch regular expression, Abkürzung RegExp oder Regex) ist in der theoretischen Informatik eine Zeichenkette, die der Beschreibung von Mengen von Zeichenketten mit Hilfe bestimmter syntaktischer Regeln dient.</blockquote>
+      <p style="color:#999;"><a href="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Wikipedia</a></p>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Definition &quot;Regulärer Ausdruck&quot; (2)</h2>
+    </hgroup>
+    <article>
+      <blockquote cite="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Neben Implementierungen in vielen Programmiersprachen verarbeiten auch viele Texteditoren reguläre Ausdrücke in der Funktion &quot;Suchen und Ersetzen&quot;. Ein einfacher Anwendungsfall von regulären Ausdrücken sind Wildcards.</blockquote>
+      <p style="color:#999;"><a href="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Wikipedia</a></p>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup>
+      <h2>Definition &quot;Regulärer Ausdruck&quot; (3)</h2>
+    </hgroup>
+    <article>
+      <blockquote cite="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Reguläre Ausdrücke können als Filterkriterien in der Textsuche verwendet werden, indem der Text mit dem Muster des regulären Ausdrucks abgeglichen wird. Dieser Vorgang wird auch &apos;Pattern Matching&apos; genannt.</blockquote>
+      <p style="color:#999;"><a href="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Wikipedia</a></p>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Idee, Syntax und Implementation</h2></hgroup>
+    <article>
+      <ul>
+        <li>Reguläre Ausdrücke basieren auf genau drei Operationen: &apos;Alternative&apos;, &apos;Verkettung&apos; und &apos;Wiederholung&apos;.</li>
+        <li>Die meisten heutigen Implementierungen unterstützen Erweiterungen wie zum Beispiel Rückwärtsreferenzen (backreferences).</li>
+        <li>Die im Folgenden angegebene Beschreibung ist eine (oft benutzte) Konvention, um Konzepte wie &apos;Zeichenklasse&apos;, &apos;Quantifizierung&apos;, &apos;Verknüpfung&apos; und &apos;Zusammenfassen&apos; konkret zu realisieren.</li>
+        <li>Hierbei wird ein regulärer Ausdruck aus den Zeichen des zugrunde liegenden Alphabets in Kombination mit den Metazeichen gebildet.</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Metazeichen</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Metazeichen</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>[ ]</td><td>Zeichenmenge</td><td>[a-z]</td></tr>
+          <tr><td>.</td><td>beliebiges Zeichen</td><td></td></tr>
+          <tr><td>? + *</td><td>Quantoren</td><td>\s*</td></tr>
+          <tr><td>{ }</td><td>Quantor (Anzahl)</td><td>{4} {3,} {2,5} {0,4}</td></tr>
+          <tr><td>( )</td><td>Gruppierung</td><td>(abc)+</td></tr>
+          <tr><td>|</td><td>oder-Symbol</td><td>(Katz|Maus)</td></tr>
+          <tr><td>\</td><td>Maskierung (hebt gegebenenfalls die Metabedeutung des nächsten Zeichens auf)</td><td>\?</td></tr>
+          <tr><td>^</td><td>Negation (nur am Anfang einer Zeichenmengenangabe)</td><td>[^a-z]</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Quantoren</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Metazeichen</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>+</td><td>1 oder mehrmal</td><td>\d+\. Jh\.</td></tr>
+          <tr><td>*</td><td>0 oder mehrmal</td><td>A*B*C*</td></tr>
+          <tr><td>?</td><td>0 oder einmal<br>gleichzeitig: Begrenzer der vorherigen Quantoren</br></td><td>plurals?</td></tr>
+          <tr><td>{4}</td><td>genau vier mal</td><td>\s\d{4}\s</td></tr>
+        </tbody>
+      </table>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Vordefinierte Zeichenmengen</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Zeichenmenge</th><th>Bedeutung</th><th>alternativ zu</th></tr></thead>
+        <tbody>
+          <tr><td>\d</td><td>digit</td><td>[0-9]</td></tr>
+          <tr><td>\D</td><td>no digit</td><td>[^\d]</td></tr>
+          <tr><td>\w</td><td>word character</td><td>[a-zA-Z0-9_]</td></tr>
+          <tr><td>\s</td><td>whitespace</td><td>u.a. Leerzeichen, Tabstopp (\t), Zeilenumbruch (\n, \r)</td></tr>
+          <tr><td>\p{L}</td><td>Letter (Unicode-Zeichenbereich)</td><td>auch Umlaute u.ä.</td></tr>
+          <tr><td>\p{P}</td><td>Punctuation (Unicode-Zeichenbereich)</td><td>u.a. ,;.:-?!</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Lokalisierung</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Ausdruck</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td>\b</td><td>Wortanfang oder -ende</td><td>\b\w{4}\b</td></tr>
+          <tr><td>^</td><td>Zeilen- (Absatz-) bzw. Stringanfang</td><td></td></tr>
+          <tr><td>$</td><td>Zeilen- (Absatz-) bzw. Stringende</td><td></td></tr>
+          <tr><td>(?=Ausdruck)</td><td>positive look-ahead assertion</td><td>Ausdruck(?=Ausdruck)</td></tr>
+          <tr><td>(?!Ausdruck)</td><td>negative look-ahead assertion</td><td>Ausdruck(?!Ausdruck)</td></tr>
+          <tr><td>(?&lt;=Ausdruck)</td><td>positive look-behind assertion</td><td>(?&lt;=Ausdruck)Ausdruck</td></tr>
+          <tr><td>(?&lt;!Ausdruck)</td><td>negative look-behind assertion</td><td>(?&lt;!Ausdruck)Ausdruck</td></tr>
+          <tr><td>\n</td><td>n-te Gruppe</td><td>\b(\w)(\w)\2\1\b</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Verwendung beim &quot;Suchen und Ersetzen&quot;</h2></hgroup>
+    <article>
+      <ul>
+        <li>Beim Suchen und Ersetzen wird vor allem von der Gruppierung Gebrauch gemacht.</li>
+        <li>Eine Gruppe kann beim Ersetzen als &apos;Variable&apos; aufgerufen werden.</li>
+        <li>&apos;$n&apos; setzt den Inhalt der n-ten Klammer ein.</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Beispiel beim &quot;Suchen und Ersetzen&quot;</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Ausdruck</th><th>Ersetze</th></tr></thead>
+        <tbody>
+          <tr><td>([\p{L}\d\p{P}])\s*\n+\s+([\p{L}\d\p{P}&amp;\(])</td><td>$1 $2</td></tr>
+        </tbody>
+      </table>
+      <h3>Erläuterung</h3>
+      <ul>
+        <li>&quot;([\p{L}\d\p{P}])&quot;  &#x2192; Suche ein Zeichen aus der Menge der Klassen &apos;Letter&apos;, &apos;Digit&apos; oder &apos;Punctuation&apos;</li>
+        <li>&quot;\s*\n+\s+&quot;  &#x2192; Suche beliebig viele Whitespaces, gefolgt von einem Zeilenumbruch, gefolgt von mindestens einem Whitespace</li>
+        <li>&quot;([\p{L}\d\p{P}&amp;\(])&quot;  &#x2192; Suche ein Zeichen aus der Menge der Klassen &apos;Letter&apos;, &apos;Digit&apos; oder &apos;Punctuation&apos;, oder ein Ampersand</li>
+        <li>Setze an der Fundstelle den Inhalt des Ausdrucks der ersten Klammer wieder ein, gefolgt von einem Leerzeichen, gefolgt vom Inhalt des Ausdrucks der zweiten Klammer</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Beispiel beim &quot;Suchen und Ersetzen&quot;</h2></hgroup>
+    <article>
+      <table>
+        <thead><tr><th>Ausdruck</th><th>Ersetze</th></tr></thead>
+        <tbody>
+          <tr><td>"\s+(/?)></td><td>"$1></td></tr>
+        </tbody>
+      </table>
+      <h3>Erläuterung</h3>
+      <ul>
+        <li>Suche ein Anführungszeichen, gefolgt von mindestens einem Whitespace, gefolgt von keinem oder einem Schrägstrich, gefolgt von einer schließenden Spitzklammer</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide>
+    <hgroup><h2>Literatur</h2></hgroup>
+    <article>
+      <ul>
+        <li><a href="https://de.wikipedia.org/wiki/Regulärer_Ausdruck">Wikipedia: Regulärer Ausdruck</a></li>
+        <li><a href="http://regexlib.com/CheatSheet.aspx">http://regexlib.com/CheatSheet.aspx</a></li>
+        <li><a href="https://www.rexegg.com/regex-quickstart.html">https://www.rexegg.com/regex-quickstart.html</a></li>
+        <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-classes-in-regular-expressions">Character Classes in Regular Expressions</a></li>
+        <li>Jeffrey E.F. Friedl: Mastering Regular Expressions. O'Reilly 2006.</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Ende/&gt;</h2>
+      <p><img src="images/CC-BY.png"></p>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
+
+<!-- 
+===== slide-container =====
+  <slide>
+    <hgroup><h2></h2></hgroup>
+    <article>
+      <ul class="build">
+        <li></li>
+      </ul>
+    </article>
+  </slide>
+
+===== Grafik-Slide =====
+  <slide>
+    <hgroup><h2>XML/XSLT-Zusammenspiel</h2></hgroup>
+    <article class="flexbox vcenter">
+      <span><img src="images/XML-XSLT-Zusammenspiel.png" class="reflect" alt="Description" title="Description"/></span>
+    </article>
+    <footer class="source">source: place source info here</footer>
+  </slide>
+
+===== Code-Wrapper =====
+<pre class="prettyprint" data-lang="xml">
+
+===== weitere Wrapper =====
+    <article class="example">
+    <article class="smaller">
+    <b>&lt;folie></b>
+
+
+-->
