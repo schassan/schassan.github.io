@@ -8,6 +8,6 @@
 
 Folien zum Vortrag auf dem Workshop in München. Online zu finden unter:
 
-https://schassan.github.io/2019-Mehr-als-ein-Dienstleister
+https://schassan.github.io/20190927_Mehr-als-ein-Dienstleister
 
 Alle Inhalte [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/), [Torsten Schaßan](https://orcid.org/0000-0002-8902-4775)
