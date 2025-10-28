@@ -27,7 +27,7 @@ var SLIDE_CONFIG = {
     name: 'Torsten Schaßan',
     mail: 'schassan@hab.de',
     orcid: '0000-0002-8902-4775',
-    twitter: '@schassan',
+    mastodon: 'https://fedihum.org/@schassan',
     www: 'http://www.hab.de',
     github: 'http://github.com/schassan'
   } ]
