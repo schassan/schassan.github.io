@@ -1,0 +1,224 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usage of IIIF for digital facsimiles and digital editions at the HAB</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--This one seems to work all the time, but really small on ipad-->
+  <meta name="viewport" content="initial-scale=0.4"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" type="text/css" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" type="text/css" media="all" href="fonts/stylesheet.css" />
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup>
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Roadmap</h2></hgroup>
+    <article>
+      <ul>
+        <li>Metadata for Digital Facsimiles</li>
+        <li>Re-Publication of Digital Facsimiles
+          <ul>
+            <li>Structuring the IIIF manifests</li>
+          </ul>
+        </li>
+        <li>Sachsenspiegel_online</li>
+        <li>IIIF for Digital Editions</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Metadata for Digital Facsimiles</h2></hgroup>
+    <article>
+      <ul>
+        <li>captureType
+          <ul>
+            <li>singlePage, opening, detail</li>
+          </ul>
+        </li>
+        <li>completeness
+          <ul>
+            <li>complete (different degrees possible: bookblock, cover, spine and edges)</li>
+            <li>partial (different degrees possible: coherent pages, example pages)</li>
+          </ul>
+        </li>
+        <li>digitizationType
+          <ul>
+            <li>color, greyscale, bw, thermo, spectral, microscope, threeD, other</li>
+          </ul>
+        </li>
+        <li>sourceType
+          <ul>
+            <li>original, reproduction</li>
+          </ul>
+        </li>
+        <li>Controlled vocabulary at https://normdaten.staatsbibliothek-berlin.de/vocabulary/</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Metadata in TEI</h2></hgroup>
+    <pre class="prettyprint" data-lang="xml">&lt;surrogates>
+  &lt;bibl>
+    &lt;idno>HSP-UUID&lt;/idno>
+    &lt;ref type="manifest" target="https://some-manifest-url"/>
+    &lt;ref type="other" target="https://some-other-url"/>
+    &lt;ref type="thumbnail" target="https://some-jpg"/>
+    &lt;ref type="completeness" target=„http://some-thesaurus-uri"/>
+    &lt;date when="" type="digitized">&lt;/date>
+    &lt;date when="" type="issued">&lt;/date>
+    &lt;date when="" type="published">&lt;/date>
+    &lt;placeName type="digitizing" ref="some-uri">&lt;/placeName>
+    &lt;orgName type="digitizing" ref="some-uri">&lt;/orgName>
+  &lt;/bibl>
+&lt;/surrogates></pre>
+  </slide>
+  <slide>
+    <hgroup><h2>Facsimile in TEI</h2></hgroup>
+    <pre class="prettyprint" data-lang="xml">&lt;facsimile xmlns="http://www.tei-c.org/ns/1.0" xml:id="ptr2images_mss_27-6-poet>
+  &lt;graphic xml:id="mss_27-6-poet-1_00001" url="http://diglib.hab.de/mss/27-6-poet-1/00001.jpg" n="Ir"/>
+  &lt;graphic xml:id="mss_27-6-poet-1_00002" url="http://diglib.hab.de/mss/27-6-poet-1/00002.jpg" n="Iv"/>
+  &lt;graphic xml:id="mss_27-6-poet-1_00003" url="http://diglib.hab.de/mss/27-6-poet-1/00003.jpg" n="1r"/>
+  &lt;graphic xml:id="mss_27-6-poet-1_00004" url="http://diglib.hab.de/mss/27-6-poet-1/00004.jpg" n="1v"/>
+  …
+&lt;/facsimile></pre>
+  </slide>
+  <slide>
+    <hgroup><h2>Re-Publication of Digital Facsimiles</h2></hgroup>
+    <article>
+      <ul>
+        <li>Need to re-publish all digital facsimile, because of the age of the presentation
+          <ul>
+            <li>delivery of static jpg-files</li>
+            <li>no zoom, no other image manipulation possible</li>
+          </ul>
+        </li>
+        <li>Some digital facsimile had been published as IIIF in the course of the project <a href="https://hab.bodleian.ox.ac.uk/en/">Manuscripts from German-Speaking Lands – A Polonsky Foundation Digitization Project</a> → test implementation</li>
+        <li>Re-structuring of image storage
+          <ul>
+            <li>grouping by object type (mss, prints, etc) and shelf mark</li>
+            <li>more than one disc lead to possible multiple digitisation</li>
+          </ul>
+        </li>
+        <li>Re-grouping into subcollections according to metadata information</li>
+        <li>from → /master/mss01/mss/27-6-poet-1/00001.tif
+          <br/>to → /images/mss/27-6-poet/2005_standard_original/27-6-poet_00001.jp2</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Structuring the IIIF manifests</h2></hgroup>
+    <article>
+      <ul>
+        <li>more than one sequence and/or range
+          <ul>
+            <li>grouped by metadata combination</li>
+          </ul>
+        </li>
+        <li>more than one image per canvas</li>
+        <li>„reconstruction“ of volumes (re-arrange, virtual binding)</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Sachsenspiegel_online</h2></hgroup>
+    <article>
+      <ul>
+        <li>example Cod. Guelf. 3.1 Aug. 2, the „Wolfenbüttel Sachsenspiegel“</li>
+        <li>Digital Edition <a href="http://www.sachsenspiegel-online.de/export/index.html">Sachsenspiegel online</a> (2004, SQL + Java)</li>
+        <li>The functionality comprised hovering transcription, et al.</li>
+      </ul>
+      <img src="images/Sachsenspiegel_online.png" alt="alte Sachsenspiegel online Homepage"/>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Sachsenspiegel_online new: Transkription</h2></hgroup>
+    <article>
+      <ul>
+        <li>Export from SQL-DB</li>
+        <li>Transformation to JSON by Dr. Martin de la Iglesia</li>
+        <li><a href="https://github.com/Martin-de-la-Iglesia/iiif-test">https://github.com/Martin-de-la-Iglesia/iiif-test</a></li>
+      </ul>
+      <img src="images/Sachsenspiegel_online_neu_transcript.png" alt="neue Sachsenspiegel online Transkription"/>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Sachsenspiegel_online new: Indizes</h2></hgroup>
+    <article>
+      <ul>
+        <li>Due to the lack of a publication plattform, the implementation as IIIF is (again) just a proof of concept</li>
+        <li>Does anybody implement IIIF Content Search API?</li>
+      </ul>
+      <img src="images/Sachsenspiegel_online_neu_index.png" alt="neue Sachsenspiegel online Registerbegriffe"/>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Sachsenspiegel_online new: IIIF</h2></hgroup>
+    <article>
+      <ul>
+        <li>Transcription, translation, and image annotations are specified as annotations.</li>
+        <li>Regions in the image have been preserved.</li>
+      </ul>
+      <img src="images/JSON_snippet.png" alt="Ausschnitt aus dem JSON Manifest"/>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>IIIF in Digital Editions</h2></hgroup>
+    <article>
+      <ul>
+        <li>Other digital editions will use IIIF to include images</li>
+        <li>A dedicated annotation server is not (yet) planned</li>
+        <li>Some editions acquire their transcription using HTR (so far Transkribus, switch to eScriptorium due to FAIRness is planned)
+          <br/>→ a more common text-image-linking is possible/desirable</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Ende/&gt;</h2>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+    <aside class="right bottom"><img src="images/CC-BY.png"></aside>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
