@@ -348,15 +348,15 @@ slides > slide.backdrop:after, slides > slide.backdrop:before {
   display: none;
 }
 /* line 180, ../scss/default.scss */
-slides > slide > article + h2 {
+slides > slide > hgroup + article {
   margin-top: 45px;
 }
 /* line 184, ../scss/default.scss */
-slides > slide > article + h2.flexbox.vcenter, slides > slide > article + h2.flexbox.vleft, slides > slide > article + h2.flexbox.vright {
+slides > slide > hgroup + article.flexbox.vcenter, slides > slide > hgroup + article.flexbox.vleft, slides > slide > hgroup + article.flexbox.vright {
   height: 80%;
 }
 /* line 189, ../scss/default.scss */
-slides > slide > article + h2 p {
+slides > slide > hgroup + article p {
   margin-bottom: 1em;
 }
 /* line 194, ../scss/default.scss */
