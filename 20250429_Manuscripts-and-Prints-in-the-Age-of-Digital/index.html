@@ -1,0 +1,191 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manuscripts and Prints in the Age of Digital</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="content-type" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--This one seems to work all the time, but really small on ipad-->
+  <meta name="viewport" content="initial-scale=0.4"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="stylesheet" type="text/css" media="all" href="theme/css/default.css"/>
+  <link rel="stylesheet" type="text/css" media="all" href="fonts/stylesheet.css" />
+  <base target="_blank"/> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/HAB_logo.png"/></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"/></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup>
+      <h1 data-config-title><!-- populated from slide_config.js --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.js --></h2>
+      <p data-config-presenter><!-- populated from slide_config.js --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup><h2>Roadmap</h2></hgroup>
+    <article>
+      <ul>
+        <li>Motivation</li>
+        <li>An Example &#x2014; <a href="https://diglib.hab.de/?db=mss&amp;list=ms&amp;id=a-27-6-poet">A: 27.6 Poet.</a></li>
+        <li>Prints in the Realm of Manuscript</li>
+        <li>Manuscripts in the Realm of Print</li>
+        <li>Manuscripts and Prints in Conceptual Reference Models</li>
+        <li>Digital Representation of Manuscripts and Prints</li>
+        <li>The (desired) Future of Presentation of Cultural Objects</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Motivation</h2></hgroup>
+    <p>&#xA0;</p>
+    <img src="images/HSP_form.png" alt="Facetted browsing for 'Form type'" style="float: right; margin-left: 15px;"/>
+    <ol style="list-style: decimal;">
+      <li><i>Core data fields</i> in the Handschriftenportal
+        <ul>
+          <li>Identification (Settlement, Repository, Shelf mark, Title)</li>
+          <li>Materiality (Form, Support, Extent, Format, Size)</li>
+          <li>Origin (Place, Date, Type of Dating)</li>
+          <li>Content (Language, Decoration, Musical Notation)</li>
+        </ul>
+        <p>For most fields we curate authority data and/or controlled vocabulary</p>
+        <p>Information for these fields is derived from descriptions, but „attached“ to the Cultural Object Document (KOD)</p>
+      </li>
+      <li>At HAB: Implementation of IIIF → examination of all digital facsimile of manuscripts</li>
+    </ol>
+  </slide>
+  <slide>
+    <hgroup><h2>An Example &#x2014; A: 27.6 Poet.</h2></hgroup>
+    <img src="images/27-6-poet_eb01_cropped.jpg" alt="Front cover of A: 27.6 Poet." style="width: 38%;"/>
+    <img src="images/27-6-poet_ebs01_cropped.jpg" alt="Spine of A: 27.6 Poet." style="margin-left: 10px; width: 20%;"/>
+    <img src="images/27-6-poet_eb04_cropped.jpg" alt="Back cover of A: 27.6 Poet." style="margin-left: 10px; width: 38%;"/>
+  </slide>
+  <slide>
+    <hgroup><h2>'Sammelband' and 'Print with Manuscript Parts'?</h2></hgroup>
+    <p>&#xA0;</p>
+    <img src="images/27-3-poet_2-inc_00003_cropped.jpg" alt="Inc. 1 in A: 27.6 Poet." style="margin-left: 15px; width: 25%;"/>
+    <img src="images/27-3-poet_3-mss_00003_cropped.jpg" alt="Fol. 1r in A: 27.6 Poet." style="margin-left: 15px; width: 25%;"/>
+    <img src="images/Heinemann_27-6-poet_00256_marked.jpg" alt="Heinemann's descriptions of A: 27.6 Poet." style="width: 45%;"/>
+    <footer class="source">left: Entry no. 3: Inc 1: Publij Virgilij Maronis Bucolica [Leipzig, Stöckel, ca. 1500], S. 1
+      <br/>middle: Entry no. 4: Eiusdem Georgicorum libb. IV.
+      <br/>right: Heinemann's description of A: 27.6. Poet. (prints in the middle mentioned, prints at the end left out)</footer>
+  </slide>
+  <slide>
+    <hgroup><h2>Prints in the Realm of Manuscript</h2></hgroup>
+    <article>
+      <ul>
+        <li>Prints should be mentioned</li>
+        <li>Descriptions are stored in TEI
+          <ul>
+            <li>TEI allows to describe the object (msIdentifier, objectDesc, etc)</li>
+            <li>TEI allows to represent the object in various ways</li>
+            <li>Concerning the bibliographical level, TEI is less useful: It is not possible to represent the manifestation level properly.</li>
+            <li>For parts of a volume that have their own context of production, TEI offers &lt;msPart&gt;, but this element (so far) is reserved for (manuscript) booklets only.</li>
+          </ul>
+        </li>
+        <li>The Music Encoding Initiative (MEI) adapts the <a href="https://repository.ifla.org/handle/123456789/659">Functional Requirements for Bibliographical Records</a> (FRBRoo)
+          <ul>
+            <li>WEMI: Work, Expression, Manifestation, Item</li>
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Manuscripts in the Realm of Print</h2></hgroup>
+    <article>
+      <ul>
+        <li>Catalogue entries for printed works address their manifestation.</li>
+        <li>The object appears most often only as shelf mark.</li>
+        <li>Information about provenances begin to sink in.</li>
+        <li>Terms like <i>Marginalien</i> or <i>handschriftliche Annotationen</i> show hints of hand-written texts.</li>
+        <li><b>Note:</b> Those information are currently kept at the local level of catalogue entries and cannot be searched in Union catalogues!
+          <ul>
+            <li>Latest future trends raise the idea to advance the item level information to the manifestation level, only to make it searchable.</li>
+          </ul>
+        </li>
+        <li>Online catalogues are huge information systems, cataloguing rules are well established, and thus both change slowly.</li>
+        <li>The introduction of RDA did not change very much, since the WEMI hierarchy is not fully implemented.</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Manuscript and Print<br/>in Conceptual Reference Models</h2></hgroup>
+    <article>
+      <ul>
+        <li><a href="https://cidoc-crm.org/">CIDOC-CRM</a>, <a href="https://cidoc-crm.org/f4-manifestation-singleton">F4</a> defines “manifestation singletons”:
+          <br/>→ “produced as unique objects, with no siblings intended in the course of their production.”</li>
+        <li>The <a href="https://doi.org/10.82487/ifla.3677">Library Reference Model</a> (LRMoo), v1.0 deprecated F4, instead merged it with F3 Manifestation and requires a single instance of F5 Item to be instantiated.</li>
+        <li>CIDOC-CRM, F4 goes on:
+          <blockquote cite="https://cidoc-crm.org/f4-manifestation-singleton">“It should be noted that if all but one copy of a given publication are destroyed, then that copy does not become an instance of F4 Manifestation Singleton, because it was produced together with sibling copies, even though it now happens to be unique.”</blockquote>
+        </li>
+        <li>IMO, this extension applies to prints “as objects”, but (in general) not to the historical “Sammelband”, which as an object is a creation of the owner who had it bound.</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>Digital Representation of Manuscripts and Prints</h2></hgroup>
+    <article>
+      <ul>
+        <li>Digitalisation policy of the Deusche Forschungsgemeinschaft (DFG):
+          <ul>
+            <li>From prints, in the past only titlepages were to be digitised.</li>
+            <li>Recently, from every textual work (Textwerk) only one copy should be digitised.</li>
+          </ul>
+        </li>
+        <li>In general, manuscripts are digitalised in its entirety, from cover to cover, preferably with spine and edges.
+          <br/>→ But: Manuscript volumes with major portions of prints wouldn't have been dealt with in this integral way either.</li>
+        <li>Digitalisation of prints covered manifestations. At best images of the binding were stored together with the images of a print.</li>
+      </ul>
+    </article>
+  </slide>
+  <slide>
+    <hgroup><h2>The (desired) Future Representation<br/>of Cultural Objects</h2></hgroup>
+    <article>
+      <ol style="list-style: decimal;">
+        <li>Concerning cataloguing, (historical) prints should be treated as „manifestation singletons“ (respectively according to LRMoo).</li>
+        <li>More attention shall be given to the historical object, especially the object in form of a „Sammelband“ is usually unique.</li>
+        <li>This appreciation has to be met not only in cataloguing, but as well in digitalisation, and scholarly editing practices.</li>
+        <li>The realms of manuscript and prints should brought closer, adapting cataloguing practices as appropriate and at least link between cataloguing systems</li>
+      </ol>
+    </article>
+  </slide>
+  
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/HAB_logo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Ende/&gt;</h2>
+      <p><!--Important contact information goes here.--></p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+    <aside class="right bottom"><img src="images/CC-BY.png"></aside>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>
