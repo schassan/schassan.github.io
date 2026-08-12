@@ -26,7 +26,7 @@ var SLIDE_CONFIG = {
     company: 'Digitale Editionen<br>Herzog August Bibliothek Wolfenbüttel',
     mail: 'schassan@hab.de',
     orcid: '0000-0002-8902-4775',
-    twitter: '@schassan',
+    Mastodon: '@schassan@fedihum.org',
     www: 'http://www.hab.de',
     github: 'http://github.com/schassan'
   }/*, {
